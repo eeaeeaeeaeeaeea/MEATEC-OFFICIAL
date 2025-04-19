@@ -1,3 +1,130 @@
+body {
+  margin: 0;
+  background: #000;
+  color: #00ff99;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  overflow-x: hidden;
+}
+
+.terminal {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: auto;
+  border-left: 4px solid #00ff99;
+  background: #000;
+  box-shadow: 0 0 20px #00ff99;
+}
+
+h1 {
+  font-size: 3rem;
+  text-shadow: 0 0 5px #00ff99;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: #00ffcc;
+  text-shadow: 0 0 3px #00ffcc;
+}
+
+.tagline {
+  color: #66ffc2;
+  font-style: italic;
+  animation: blink 1s step-start infinite;
+}
+
+input {
+  background: #000;
+  border: 1px solid #00ff99;
+  padding: 10px;
+  color: #00ff99;
+  width: 250px;
+  font-family: inherit;
+  margin-top: 10px;
+}
+
+button {
+  background: #111;
+  color: #00ff99;
+  padding: 10px 20px;
+  border: 1px solid #00ff99;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.warning {
+  color: #888;
+  margin-top: 15px;
+  font-style: italic;
+  transition: all 0.2s ease;
+}
+
+.footnote {
+  font-size: 0.8rem;
+  color: #008866;
+  margin-top: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li::before {
+  content: "$ ";
+  color: #00ff99;
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #00ff99;
+  box-shadow: 0 0 5px #00ff99;
+  animation: scan 2s infinite linear;
+  z-index: 999;
+}
+
+@keyframes scan {
+  0% {
+    top: 0%;
+    opacity: 0.2;
+  }
+  50% {
+    top: 90%;
+    opacity: 0.4;
+  }
+  100% {
+    top: 0%;
+    opacity: 0.2;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
