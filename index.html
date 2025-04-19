@@ -1,173 +1,148 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MEATEC - 技術を以って限界を制する</title>
+  <meta charset="UTF-8">
+  <title>MEATEC INTERFACE</title>
   <style>
     body {
-      margin: 0;
       background: #000;
       color: #00ff99;
       font-family: 'Courier New', monospace;
-      font-size: 1rem;
-      overflow-x: hidden;
+      margin: 0;
+      padding: 20px;
     }
-
-    .terminal {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
-      border-left: 4px solid #00ff99;
-      background: #000;
-      box-shadow: 0 0 20px #00ff99;
-    }
-
-    h1 {
-      font-size: 3rem;
-      text-shadow: 0 0 5px #00ff99;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      margin-bottom: 10px;
+    h1, h2 {
       color: #00ffcc;
-      text-shadow: 0 0 3px #00ffcc;
+      text-shadow: 0 0 5px #00ffcc;
     }
-
-    .tagline {
-      color: #66ffc2;
-      font-style: italic;
-      animation: blink 1s step-start infinite;
+    .section {
+      margin-top: 40px;
     }
-
-    input {
-      background: #000;
-      border: 1px solid #00ff99;
-      padding: 10px;
-      color: #00ff99;
-      width: 250px;
-      font-family: inherit;
-      margin-top: 10px;
-    }
-
-    button {
-      background: #111;
-      color: #00ff99;
-      padding: 10px 20px;
-      border: 1px solid #00ff99;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-
-    .warning {
-      color: #888;
-      margin-top: 15px;
-      font-style: italic;
-      transition: all 0.2s ease;
-    }
-
-    .footnote {
-      font-size: 0.8rem;
-      color: #008866;
-      margin-top: 10px;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    ul li::before {
-      content: "$ ";
-      color: #00ff99;
-    }
-
-    .scanline {
+    #codeRain {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      height: 2px;
-      background: #00ff99;
-      box-shadow: 0 0 5px #00ff99;
-      animation: scan 2s infinite linear;
-      z-index: 999;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
-
-    @keyframes scan {
-      0% { top: 0%; opacity: 0.2; }
-      50% { top: 90%; opacity: 0.4; }
-      100% { top: 0%; opacity: 0.2; }
+    #logConsole {
+      background: #111;
+      padding: 20px;
+      border: 1px solid #00ff99;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: monospace;
     }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+    #chatWindow {
+      height: 200px;
+      overflow-y: auto;
+      background: #111;
+      padding: 10px;
+      font-family: monospace;
+      color: #66ffcc;
+      border: 1px solid #00ff99;
     }
-
-    .shake {
-      animation: shake 0.5s;
+    input[type="text"] {
+      width: 80%;
+      background: #000;
+      color: #00ff99;
+      border: 1px solid #00ff99;
+      padding: 8px;
+      margin-top: 10px;
     }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      20% { transform: translateX(-8px); }
-      40% { transform: translateX(8px); }
-      60% { transform: translateX(-6px); }
-      80% { transform: translateX(6px); }
-      100% { transform: translateX(0); }
+    button {
+      background: #000;
+      color: #00ff99;
+      border: 1px solid #00ff99;
+      padding: 8px;
     }
   </style>
 </head>
 <body>
-  <div class="scanline"></div>
+  <canvas id="codeRain"></canvas>
 
-  <header class="terminal">
-    <h1>MEATEC</h1>
-    <p class="tagline">> 技術を以って限界を制する</p>
-  </header>
+  <h1>MEATEC INTERFACE</h1>
+  <p>技術を以って限界を制する</p>
 
-  <section class="terminal about">
-    <h2>~$ whoami</h2>
-    <p>認証エラー：アクセスレベルが不足しています。情報の一部は伏せられています。</p>
-  </section>
+  <div class="section">
+    <h2>リアルタイム監視ログ</h2>
+    <div id="logConsole">
+      <strong>== MEATEC MONITOR INTERFACE ==</strong><br>
+    </div>
+  </div>
 
-  <section class="terminal projects">
-    <h2>~$ ls ./projects</h2>
-    <ul>
-      <li>【機密】プロジェクト・ハイエナ</li>
-      <li>【機密】代替経済作戦（ALT_Economy）</li>
-      <li>【抹消】意識融合実験（MERGE_MIND）</li>
-    </ul>
-  </section>
-
-  <section class="terminal login">
-    <h2>~$ su root</h2>
-    <input type="password" id="password" placeholder="ルートキーを入力..." />
-    <button onclick="checkPassword()">アクセス</button>
-    <p class="warning" id="warningMsg">※ パスワードを入力してください。</p>
-  </section>
-
-  <footer class="terminal">
-    <p>© 2025 KUROMAKU INDUSTRIES — すべての記録権を保持。</p>
-    <p class="footnote">監視ステータス：<span style="color: #00ff99;">有効</span></p>
-  </footer>
+  <div class="section">
+    <h2>中枢AI 会話端末</h2>
+    <div id="chatWindow"></div>
+    <input type="text" id="userInput" placeholder=">> あなたの命令を入力">
+    <button onclick="talkToAI()">送信</button>
+  </div>
 
   <script>
-    function checkPassword() {
-      const input = document.getElementById('password').value;
-      const warning = document.getElementById('warningMsg');
-
-      if (input === 'shadowroot') {
-        warning.style.color = '#00ff99';
-        warning.textContent = 'アクセス認証成功...だと思ったか？ 認証偽装検知中...';
-      } else {
-        warning.style.color = '#ff3333';
-        warning.textContent = 'アクセス拒否：セキュリティ突破失敗。プロトコル Z を起動...';
-        warning.classList.add('shake');
-        setTimeout(() => warning.classList.remove('shake'), 500);
+    // コードレイン背景
+    const canvas = document.getElementById('codeRain');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const katakana = "アカサタナハマヤラワ0123456789";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ff99";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = katakana.charAt(Math.floor(Math.random() * katakana.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        drops[i]++;
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
       }
+    }
+    setInterval(draw, 33);
+
+    // リアルタイムログ
+    const logs = [
+      "[03:11:09] >> ユーザーBの視線変動を検出",
+      "[03:11:15] >> サブネット：応答遅延 23ms",
+      "[03:11:20] >> 干渉レベル：正常",
+      "[03:11:28] >> AIリンク維持中... /ID#29311",
+      "[03:11:35] >> 外部ノイズ感知：解析中...",
+      "[03:11:40] >> STATUS OK"
+    ];
+    let i = 0;
+    function addLog() {
+      if (i < logs.length) {
+        const logConsole = document.getElementById("logConsole");
+        logConsole.innerHTML += logs[i] + "<br>";
+        logConsole.scrollTop = logConsole.scrollHeight;
+        i++;
+      }
+    }
+    setInterval(addLog, 2000);
+
+    // AI会話
+    function talkToAI() {
+      const input = document.getElementById("userInput");
+      const command = input.value.trim();
+      if (!command) return;
+      const chatWindow = document.getElementById("chatWindow");
+      chatWindow.innerHTML += "<div>>> " + command + "</div>";
+      const response = getAIResponse(command);
+      chatWindow.innerHTML += "<div><span style='color:#ff66cc;'>[MEATEC-AI]</span>: " + response + "</div>";
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      input.value = "";
+    }
+
+    function getAIResponse(cmd) {
+      if (cmd.includes("状態")) return "全セクター：正常。";
+      if (cmd.includes("ハイエナ")) return "プロジェクト・ハイエナは現在フェーズ2を継続中。";
+      if (cmd.includes("限界")) return "限界という概念は当機構には存在しません。";
+      return "コマンドを解釈中…不明な入力。";
     }
   </script>
 </body>
