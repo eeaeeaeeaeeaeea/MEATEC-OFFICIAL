@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>MEATEC INTERFACE</title>
+  <title>MEATEC - 技術を以って限界を制する</title>
   <style>
     body {
       background: #000;
@@ -11,7 +11,7 @@
       margin: 0;
       padding: 20px;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #00ffcc;
       text-shadow: 0 0 5px #00ffcc;
     }
@@ -26,22 +26,19 @@
       height: 100%;
       z-index: -1;
     }
-    #logConsole {
+    #logConsole, #chatWindow {
       background: #111;
-      padding: 20px;
       border: 1px solid #00ff99;
-      max-height: 300px;
-      overflow-y: auto;
+      padding: 20px;
       font-family: monospace;
+      overflow-y: auto;
+    }
+    #logConsole {
+      max-height: 200px;
     }
     #chatWindow {
       height: 200px;
-      overflow-y: auto;
-      background: #111;
-      padding: 10px;
-      font-family: monospace;
       color: #66ffcc;
-      border: 1px solid #00ff99;
     }
     input[type="text"] {
       width: 80%;
@@ -57,13 +54,43 @@
       border: 1px solid #00ff99;
       padding: 8px;
     }
+    .warning {
+      background: #220000;
+      border: 1px solid #ff3333;
+      color: #ff3333;
+      padding: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <canvas id="codeRain"></canvas>
 
-  <h1>MEATEC INTERFACE</h1>
+  <h1>MEATEC</h1>
   <p>技術を以って限界を制する</p>
+
+  <div class="section">
+    <h2>企業理念</h2>
+    <p>限界など、私たちにはない。</p>
+    <p>MEATECは常に「到達不可能」を打破するため、あらゆる分野において技術的・戦略的限界に挑み続けています。</p>
+  </div>
+
+  <div class="section">
+    <h2>プロジェクト・ハイエナ</h2>
+    <p>ステータス：<span style="color:#ff66cc;">フェーズ2進行中</span></p>
+    <p>都市構造におけるデータ浸透と動的解析。対象は都市管理AIおよび未承認サーバ領域。</p>
+    <p>・標的：自治体情報システム網 / ダークノード系列<br>・目的：行動パターンの予測と介入</p>
+    <div class="warning">※ プロジェクト詳細はレベル4アクセス以上が必要です。</div>
+  </div>
+
+  <div class="section">
+    <h2>アクセス制限</h2>
+    <p>以下のページへのアクセスは拒否されました。</p>
+    <div class="warning">[ 警告音再生中... セキュリティ突破失敗 ]</div>
+    <audio autoplay>
+      <source src="警告音.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
   <div class="section">
     <h2>リアルタイム監視ログ</h2>
@@ -111,39 +138,4 @@
       "[03:11:15] >> サブネット：応答遅延 23ms",
       "[03:11:20] >> 干渉レベル：正常",
       "[03:11:28] >> AIリンク維持中... /ID#29311",
-      "[03:11:35] >> 外部ノイズ感知：解析中...",
-      "[03:11:40] >> STATUS OK"
-    ];
-    let i = 0;
-    function addLog() {
-      if (i < logs.length) {
-        const logConsole = document.getElementById("logConsole");
-        logConsole.innerHTML += logs[i] + "<br>";
-        logConsole.scrollTop = logConsole.scrollHeight;
-        i++;
-      }
-    }
-    setInterval(addLog, 2000);
-
-    // AI会話
-    function talkToAI() {
-      const input = document.getElementById("userInput");
-      const command = input.value.trim();
-      if (!command) return;
-      const chatWindow = document.getElementById("chatWindow");
-      chatWindow.innerHTML += "<div>>> " + command + "</div>";
-      const response = getAIResponse(command);
-      chatWindow.innerHTML += "<div><span style='color:#ff66cc;'>[MEATEC-AI]</span>: " + response + "</div>";
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-      input.value = "";
-    }
-
-    function getAIResponse(cmd) {
-      if (cmd.includes("状態")) return "全セクター：正常。";
-      if (cmd.includes("ハイエナ")) return "プロジェクト・ハイエナは現在フェーズ2を継続中。";
-      if (cmd.includes("限界")) return "限界という概念は当機構には存在しません。";
-      return "コマンドを解釈中…不明な入力。";
-    }
-  </script>
-</body>
-</html>
+      "[03:11:35] >> 外部ノイズ
