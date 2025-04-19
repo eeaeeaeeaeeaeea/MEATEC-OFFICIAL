@@ -4,19 +4,27 @@
   <meta charset="UTF-8">
   <title>MEATEC - 技術を以って限界を制する</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
     body {
-      background: #000;
+      background: radial-gradient(ellipse at center, #000000 0%, #020202 100%);
       color: #00ff99;
-      font-family: 'Courier New', monospace;
+      font-family: 'Share Tech Mono', monospace;
       margin: 0;
       padding: 20px;
+      overflow-x: hidden;
     }
     h1, h2, h3 {
-      color: #00ffcc;
-      text-shadow: 0 0 5px #00ffcc;
+      color: #00fff7;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
     }
     .section {
       margin-top: 40px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid #00ffcc;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 20px #00ffee33;
     }
     #codeRain {
       position: fixed;
@@ -27,11 +35,13 @@
       z-index: -1;
     }
     #logConsole, #chatWindow {
-      background: #111;
-      border: 1px solid #00ff99;
+      background: #0f0f0fdd;
+      border: 1px solid #00ffcc;
       padding: 20px;
       font-family: monospace;
       overflow-y: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ffcc55;
     }
     #logConsole {
       max-height: 200px;
@@ -43,23 +53,33 @@
     input[type="text"] {
       width: 80%;
       background: #000;
-      color: #00ff99;
-      border: 1px solid #00ff99;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
       padding: 8px;
       margin-top: 10px;
+      border-radius: 5px;
     }
     button {
       background: #000;
-      color: #00ff99;
-      border: 1px solid #00ff99;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
       padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+    button:hover {
+      background: #00ffcc;
+      color: #000;
+      box-shadow: 0 0 10px #00ffcc;
     }
     .warning {
       background: #220000;
       border: 1px solid #ff3333;
-      color: #ff3333;
+      color: #ff6666;
       padding: 10px;
       font-weight: bold;
+      box-shadow: 0 0 10px #ff333366;
     }
   </style>
 </head>
@@ -138,4 +158,39 @@
       "[03:11:15] >> サブネット：応答遅延 23ms",
       "[03:11:20] >> 干渉レベル：正常",
       "[03:11:28] >> AIリンク維持中... /ID#29311",
-      "[03:11:35] >> 外部ノイズ
+      "[03:11:35] >> 外部ノイズ感知：解析中...",
+      "[03:11:40] >> STATUS OK"
+    ];
+    let i = 0;
+    function addLog() {
+      if (i < logs.length) {
+        const logConsole = document.getElementById("logConsole");
+        logConsole.innerHTML += logs[i] + "<br>";
+        logConsole.scrollTop = logConsole.scrollHeight;
+        i++;
+      }
+    }
+    setInterval(addLog, 2000);
+
+    // AI会話
+    function talkToAI() {
+      const input = document.getElementById("userInput");
+      const command = input.value.trim();
+      if (!command) return;
+      const chatWindow = document.getElementById("chatWindow");
+      chatWindow.innerHTML += "<div>>> " + command + "</div>";
+      const response = getAIResponse(command);
+      chatWindow.innerHTML += "<div><span style='color:#ff66cc;'>[MEATEC-AI]</span>: " + response + "</div>";
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      input.value = "";
+    }
+
+    function getAIResponse(cmd) {
+      if (cmd.includes("状態")) return "全セクター：正常。";
+      if (cmd.includes("ハイエナ")) return "プロジェクト・ハイエナは現在フェーズ2を継続中。";
+      if (cmd.includes("限界")) return "限界という概念は当機構には存在しません。";
+      return "コマンドを解釈中…不明な入力。";
+    }
+  </script>
+</body>
+</html>
